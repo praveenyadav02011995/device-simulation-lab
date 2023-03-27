@@ -1,0 +1,51 @@
+;;
+;; (journal:on "/home/students/MVLSI_2022/Group2/Praveen/assign86/m3d.jrl")
+;; "/home/students/MVLSI_2022/Group2/Praveen/assign8 ...
+(sdegeo:set-auto-region-naming OFF)
+;; #t
+(bound? 'region_1)
+;; #f
+(sdegeo:create-rectangle (position 0 0 0)  (position 1 1 0) "Silicon" "region_1")
+;; #[body 5 1]
+(sdegeo:define-contact-set "A" 4  (color:rgb 1 0 0 ) "##")
+;; ()
+(sdegeo:define-contact-set "B" 4  (color:rgb 1 0 0 ) "##")
+;; ()
+
+;; ()
+(render:rebuild)
+;; ()
+(sdegeo:define-2d-contact (list (car (find-edge-id (position 0 0.5 0)))) "A")
+
+;; ()
+(render:rebuild)
+;; ()
+(sdegeo:define-2d-contact (list (car (find-edge-id (position 1 0.5 0)))) "B")
+
+;; ()
+(render:rebuild)
+;; ()
+(sdedr:define-constant-profile "ConstantProfileDefinition_N" "ArsenicActiveConcentration" 1e16)
+;; #t
+(sdedr:define-constant-profile-region "ConstantProfilePlacement_N" "ConstantProfileDefinition_N" "region_1")
+;; #t
+(sdedr:define-refinement-size "RefinementDefinition_N" 0.02 0.02 0 0.02 0.02 0 )
+;; #t
+(sdedr:define-refinement-placement "RefinementPlacement_N" "RefinementDefinition_N" (list "region" "region_1" ) )
+;; #t
+(sde:set-project-name "/home/students/MVLSI_2022/Group2/Praveen/assign86/NNEW")
+;; ""
+(sdesnmesh:iocontrols "outputFile" "/home/students/MVLSI_2022/Group2/Praveen/assign86/NNEW")
+;; #t
+(sde:set-meshing-command "snmesh")
+;; #t
+(sde:set-project-name "/home/students/MVLSI_2022/Group2/Praveen/assign86/NNEW")
+;; "/home/students/MVLSI_2022/Group2/Praveen/assign8 ...
+(sdesnmesh:iocontrols "outputFile" "/home/students/MVLSI_2022/Group2/Praveen/assign86/NNEW")
+;; #t
+(sde:build-mesh "" "/home/students/MVLSI_2022/Group2/Praveen/assign86/NNEW")
+"Meshing successful"
+;; #t
+(system:command "svisual /home/students/MVLSI_2022/Group2/Praveen/assign86/NNEW_msh.tdr &")
+;; 0
+;; (journal:off)

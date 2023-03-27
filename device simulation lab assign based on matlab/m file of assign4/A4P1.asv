@@ -1,0 +1,31 @@
+ clc;
+ clear all;
+   close all;
+   x=1:1:100;
+   response =[];
+   M=[];
+   iter = [];
+   C=[];
+   % analytical
+   for i=1:100
+       v=i/100;
+       response = [response v];
+       iter = [iter i];
+   end
+   %plot(iter, response);
+% numerical
+   for i=1:99 
+       H(1,1)=1;
+    H(i+1,i)=-2; 
+    C=[C 0];     
+end
+for i=1:99
+    H(i,i+1)=1;
+end
+for i=1:99
+    H(i+1,i)=1;
+end
+A=zeros(100,1);
+A(100,1)=1;
+v=(inv(H).*A);
+plot (iter, v);
